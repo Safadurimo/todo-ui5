@@ -41,7 +41,7 @@ const getTodos = () => {
 
 app.get('/', function(req, res) {
   // Process the data received in req.body
-  res.redirect('/static/webapp/index.html');
+  res.redirect('/static/webapp/uimodule/webapp/index.html');
 });
 
 

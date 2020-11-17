@@ -1,29 +1,17 @@
 # todo-ui5
 
-## tech stack
+## Tech Stack
 
-* google app engine
-* node.js, standard environment
-* Cloud Firestore
-* ui5
+* Platform: Google App Engine Standard Environment
+* Backend: Node.js, Express
+* Database: Cloud Firestore
+* Frontend: UI5
 
 ## API
-Post TODO
-/api/todo
-Request Body contains
-{
-    "text": "Go to sumermarket"
-}
 
-Get Todo
-/api/todolist
-response body 
-[
-    {"text": "" , "id":"", "timestamp"}
-]
+[Api-Documentation](https://app.swaggerhub.com/apis-docs/Safadurimo/todo-ui5/1.0.0)
 
-
-## commands
+## Commands
 
 Starting the app locally: npm start
 
@@ -31,11 +19,32 @@ Deploying the app to app engine:
 
 ## Develment
 
-Local DEvelopment:
+Local Development:
 
 Serving static files
 Local: express app app.use('/static', express.static('static'));
 App engine: app.yaml file
 
 Database:
-Local: 
+Local: https://cloud.google.com/datastore/docs/tools/datastore-emulator#windows
+Produktion: 
+
+
+## Links
+
+* [Documentation: App Engine Standard Environment with Node](https://cloud.google.com/appengine/docs/standard/)
+ * Next link
+
+
+ 	$.ajax({
+				url: /api/todo,
+				type: 'POST',
+				data: JSON.stringify({ "text": "Martin" }),
+				contentType: 'application/json',
+				success: function(data){
+					console.log("success"+data);
+				},
+				error: function(e){
+					console.log("error: "+e);
+				}
+			  });

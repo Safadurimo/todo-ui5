@@ -1,0 +1,16 @@
+{
+  "generator-easy-ui5": {
+    "projectname": "todofrontend",
+    "namespace": "com.safadurimo.todofrontend",
+    "platform": "Static webserver",
+    "viewtype": "XML",
+    "viewname": "MainView",
+    "ui5libs": "Content delivery network (OpenUI5)",
+    "newdir": false,
+    "namespaceURI": "com/safadurimo/todofrontend",
+    "uimodules": [
+      "uimodule"
+    ],
+    "setupCompleted": true
+  }
+}
