@@ -10,6 +10,7 @@
 ## API
 
 [Api-Documentation](https://app.swaggerhub.com/apis-docs/Safadurimo/todo-ui5/1.0.0)
+[selfhosted](http://localhost:8080/static/dist/)
 
 ## Commands
 
@@ -34,17 +35,3 @@ Produktion:
 
 * [Documentation: App Engine Standard Environment with Node](https://cloud.google.com/appengine/docs/standard/)
  * Next link
-
-
- 	$.ajax({
-				url: /api/todo,
-				type: 'POST',
-				data: JSON.stringify({ "text": "Martin" }),
-				contentType: 'application/json',
-				success: function(data){
-					console.log("success"+data);
-				},
-				error: function(e){
-					console.log("error: "+e);
-				}
-			  });
