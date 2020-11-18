@@ -48,7 +48,8 @@ app.get('/', function(req, res) {
 app.get('/api/todolist', async (req, res) => {
   
   const [entities] = await getTodos();
-  res.send(entities);
+  var ob = {items:entities}
+  res.send(ob);
 })
 
 app.post('/api/todo', async (req, res) => {

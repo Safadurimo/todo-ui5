@@ -1,29 +1,23 @@
- <mvc:View controllerName="com.safadurimo.todofrontend.todofrontend.controller.MainView"
-  displayBlock="true"
-  xmlns="sap.m"
-  xmlns:mvc="sap.ui.core.mvc">
-  <App id="idAppControl" >
-    <pages>
-    <Page title="My Todo List">
-     
-			<!-- Here goes the todo cretion block-->
-			<Input id="task" placeholder="Describe your Todo here">
-			</Input>
-			<Button type="Accept" text="Save" press=".onPressSave">
-			</Button>
-			
-			<!-- Here goes the list of Todos-->
+<mvc:View controllerName="com.safadurimo.todofrontend.todofrontend.controller.MainView" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<App id="idAppControl">
+		<pages>
+			<Page title="My Todo List">
 
-			<footer>
-				<OverflowToolbar id="otbFooter">
-					<ToolbarSpacer/>
-					<OverflowToolbarButton text="Add" icon="sap-icon://add" press=".onPress"/>
+				<!-- Here goes the todo cretion block-->
+				<Input id="task" placeholder="Describe your Todo here">
+				</Input>
+				<Button type="Accept" text="Save" press=".onPressSave">
+				</Button>
 
-				</OverflowToolbar>
-			</footer>
-      
-		</Page>
-      
-    </pages>
-  </App>
+				<!-- Here goes the list of Todos-->
+				<List id="myList" items="{ path : '/items' }">
+					<StandardListItem title="{text}" />
+				</List>
+
+			</Page>
+
+		</pages>
+	</App>
 </mvc:View>

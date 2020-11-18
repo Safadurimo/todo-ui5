@@ -6,6 +6,16 @@ sap.ui.define([
   return Controller.extend("com.safadurimo.todofrontend.todofrontend.controller.MainView", {
 
     onPressSave: function () {
+      var oModel = new sap.ui.model.json.JSONModel();
+      this.getView().setModel(oModel);
+      var data = oModel.loadData("/api/todolist");
+
+      oModel.attachRequestCompleted(function (data) {
+        var d= oModel.getData();
+        console.log("AddressModel: " + d);
+        oModel.setData(oModel.getData());
+      });
+
       console.log("saved");
       $.ajax({
         url: '/api/todo',
@@ -19,7 +29,9 @@ sap.ui.define([
           console.log("error: " + e);
         }
       });
-    }
+    },
+
+
 
   });
 });
