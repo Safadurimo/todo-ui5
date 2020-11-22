@@ -13,7 +13,13 @@
 
 				<!-- Here goes the list of Todos-->
 				<List id="myList" items="{ path : '/items' }">
-					<StandardListItem title="{text}" />
+					<InputListItem label="{text}">
+						<Button type="Accept" text="Delete" press=".onPressDelete">
+						</Button>
+						<Button type="Accept" text="Mark done" press=".onPressMarkDone">
+						</Button>
+					</InputListItem>
+					<!-- <StandardListItem title="{text}" />  -->
 				</List>
 
 			</Page>
