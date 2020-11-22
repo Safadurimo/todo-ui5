@@ -39,3 +39,5 @@ Produktion: App Engine Cloud Firestore in Datastore mode
 ## Links
 
 * [Documentation: App Engine Standard Environment with Node](https://cloud.google.com/appengine/docs/standard/)
+
+https://www.heise.de/select/ct/2020/25/2014909274590776270 c't 25/2020 S. 160

@@ -15,52 +15,88 @@ app.use('/static', express.static('static'));
 // the project specified by the GOOGLE_CLOUD_PROJECT environment variable. See
 // https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/docs/authentication.md
 // These environment variables are set automatically on Google App Engine
-const {Datastore} = require('@google-cloud/datastore');
+const { Datastore } = require('@google-cloud/datastore');
 
 // Instantiate a datastore client
 const datastore = new Datastore();
 
 
-const insertTodo = (visit) => {
-  return datastore.save({
-    key: datastore.key('todo'),
-    data: visit,
-  });
-};
-
-/**
- * Retrieve the latest 10 visit records from the database.
- */
-const getTodos = () => {
-  const query = datastore
-    .createQuery('todo')
-    .order('timestamp', {descending: true});
-
-  return datastore.runQuery(query);
-};
-
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   // Process the data received in req.body
   res.redirect('/static/webapp/uimodule/webapp/index.html');
 });
 
 
-app.get('/api/todolist', async (req, res) => {
-  
-  const [entities] = await getTodos();
-  var ob = {items:entities}
-  res.send(ob);
-})
+app.get('/tasks', async (req, res) => {
 
-app.post('/api/todo', async (req, res) => {
+  const query = datastore.createQuery('todo');
+  const [tasks] = await datastore.runQuery(query);
+
+  for (const task of tasks) {
+    const taskKey = task[datastore.KEY];
+    task['id'] = taskKey.id;
+  }
+  return res.send(tasks);
+
+});
+
+app.post('/tasks', async (req, res) => {
   var todo = req.body;
-  todo.timestamp = new Date();new Date(),
-  await insertTodo(todo);
-  return res.send('Todo posted');
+  
+
+  await datastore.save({
+    key: datastore.key('todo'),
+    data: todo
+  });
+  res.json(todo);
+
+});
+
+app.get('/tasks/:id', async (req, res) => {
+
+  var id = req.params.id;
+  const taskKey = datastore.key(['todo', datastore.int(id)]);
+   
+  var todo = await datastore.get(taskKey);
+  res.json(todo[0]);
+
 });
 
 
- 
+app.put('/tasks/:id', async (req, res) => {
+
+  var id = req.params.id;
+  const taskKey = datastore.key(['todo', datastore.int(id)]);
+  var todos = await datastore.get(taskKey);
+  var todo = todos[0];
+
+  var valueToUpdate = req.body;
+
+  if ('text' in valueToUpdate){
+    todo["text"] = valueToUpdate.text;
+  }
+
+  if ('done' in valueToUpdate){
+    todo["done"] = valueToUpdate.done;
+  }
+
+  await datastore.update(
+    { "key":taskKey,
+    "data" : todo}
+
+  )
+
+  res.json(todo);
+});
+
+app.delete('/tasks/:id', async (req, res) => {
+  var id = req.params.id;
+  const taskKey = datastore.key(['todo', datastore.int(id)]);
+  await datastore.delete(taskKey);
+  res.send("alles gut");
+});
+
+
 const PORT = process.env.PORT || 8080;
 app.listen(process.env.PORT || 8080, () => {
   console.log(`App listening on port ${PORT}`);
